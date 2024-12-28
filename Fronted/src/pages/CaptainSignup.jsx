@@ -160,7 +160,7 @@ const CaptainSignup = () => {
             />
             <select
               required
-              className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base"
+              className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-base placeholder:text-base"
               value={vehicleType}
               onChange={(e) => {
                 setVehicleType(e.target.value);
@@ -187,7 +187,7 @@ const CaptainSignup = () => {
         </p>
       </div>
       <div>
-        <p className="text-[10px] mt-6 leading-tight">
+        <p className="text-[10px] mt-8 leading-tight">
           This site is protected by reCAPTCHA and the{" "}
           <span className="underline">Google Privacy Policy</span> and{" "}
           <span className="underline">Terms of Service apply</span>.
