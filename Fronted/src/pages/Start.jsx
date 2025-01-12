@@ -5,11 +5,7 @@ const Start = () => {
   return (
     <div>
       <div className="bg-center bg-cover bg-[url(https://img.freepik.com/free-photo/traffic-light_1150-18034.jpg?t=st=1734263818~exp=1734267418~hmac=699880c4fc9fa4ebd1fcc8423b80ce27d8ee474311bbabd94061eb3f5bfe970f&w=360)] h-screen pt-8  flex flex-col justify-between md:bg-[url(https://images.pexels.com/photos/10161200/pexels-photo-10161200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] md:bg-bottom w-full">
-        <img
-          className="w-16 ml-8"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/1200px-Uber_logo_2018.svg.png"
-          alt="Uber"
-        />
+        <img className="w-16 ml-8" src="EasyGo_.png" alt="Uber" />
 
         <div className="bg-white pb-7 py-4 px-4 ">
           <h2 className="text-3xl font-bold">Get started with EasyGo </h2>
