@@ -68,6 +68,7 @@ const ConfirmRidePopUp = (props) => {
               onChange={(e) => {
                 setOtp(e.target.value);
               }}
+              required
               className="bg-[#eee] px-6 py-4 font-mono text-lg rounded-md w-full mt-3"
               type="text"
               placeholder="Enter OTP"

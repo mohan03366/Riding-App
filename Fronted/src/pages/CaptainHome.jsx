@@ -46,8 +46,8 @@ const CaptainHome = () => {
     <div className="h-screen">
       <div className="fixed p-6 top-0 flex items-center justify-between w-screen">
         <img
-          className="w-16"
-          src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
+          className="w-auto h-16 -ml-12 -mt-3"
+          src="./public/LogoZ.png"
           alt=""
         />
         <Link
