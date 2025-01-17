@@ -20,7 +20,11 @@ const RidePopUp = (props) => {
             src="https://i.pinimg.com/736x/e3/ac/ee/e3acee0ffab4d039de2b424d7bf60665.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium">delulu Debs</h2>
+          <h2 className="text-lg font-medium">
+            {props.ride?.user.fullname.firstname +
+              " " +
+              props.ride?.user.fullname.lastname}
+          </h2>
         </div>
         <h5 className="text-lg font-semibold">6.9 KM</h5>
       </div>
@@ -31,20 +35,24 @@ const RidePopUp = (props) => {
             <i className="text-lg ri-map-pin-2-line"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm text-gray-600 -mt-1">Marine Drive, MFP</p>
+              <p className="text-sm text-gray-600 -mt-1">
+                {props.ride?.pickup}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2 border-gray-300  ">
             <i className="ri-map-pin-user-fill"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm text-gray-600 -mt-1">Marine Drive, MFP</p>
+              <p className="text-sm text-gray-600 -mt-1">
+                {props.ride?.destination}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 ">
             <i className="ri-money-rupee-circle-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">₹ 193.20</h3>
+              <h3 className="text-lg font-medium">₹ {props.ride?.fare}</h3>
               <p className="text-sm text-gray-600 -mt-1">Cash</p>
             </div>
           </div>
@@ -61,6 +69,7 @@ const RidePopUp = (props) => {
           <button
             onClick={() => {
               props.setConfirmRidePopUpPanel(true);
+              props.confirmRide();
             }}
             className=" mt-5 bg-green-600 text-white font-semibold p-3 px-10 rounded-lg "
           >

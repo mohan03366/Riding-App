@@ -47,7 +47,7 @@ async function getFare(pickup, destination) {
 
   return fare;
 }
-//module.exports.getFare = getFare;
+module.exports.getFare = getFare;
 
 function getOtp(num) {
   function generateOtp(num) {
@@ -76,4 +76,29 @@ module.exports.createRide = async ({
     fair: fair[vehicleType],
   });
   return rider;
+};
+
+module.exports.confirmRide = async ({ rideId, captain }) => {
+  if (!rideId) {
+    throw new Error("Ride id  are required");
+  }
+
+  await riderModel.findOneAndUpdate(
+    { _id: rideId },
+    { captain: captain._id, status: "accepted" }
+  );
+
+  const ride = await riderModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user")
+    .populate("captain")
+    .select("+otp");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
+  return ride;
 };

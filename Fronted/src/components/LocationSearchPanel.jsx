@@ -2,49 +2,40 @@ import React from "react";
 
 const LocationSearchPanel = ({
   suggestions,
-  setVehiclePanel,
+  setVehiclePanelOpen,
   setPanelOpen,
   setPickup,
   setDestination,
   activeField,
 }) => {
-  //console.log(props);
-
-  // sample array data
-  const locations = [
-    "23B, Neaar Reliance Digital, Diamond home stay, DRJLNG",
-    "33D, Near Mall Road, Khushi home stay, DRJLNG",
-    "34D, Near Motijheel, Mohini Beauty Parlour, MFP",
-  ];
-
   const handleSuggestionClick = (suggestion) => {
     if (activeField === "pickup") {
-      setPickup(suggestion);
+      setPickup(suggestion.description); // Extract the `description` property
     } else if (activeField === "destination") {
-      setDestination(suggestion);
+      setDestination(suggestion.description); // Extract the `description` property
     }
-    // setVehiclePanel(true)
-    // setPanelOpen(false)
+    // Uncomment if needed
+    //setVehiclePanelOpen(true);
+    //setPanelOpen(false);
   };
 
   return (
     <div>
-      {/* this is just a sample data */}
-
-      {locations.map(function (elem, idx) {
-        return (
-          <div
-            key={idx}
-            onClick={handleSuggestionClick}
-            className="flex items-center border-2 rounded-xl border-gray-150 active:border-black p-3 justify-start gap-4 my-2 "
-          >
-            <h2 className="bg-[#eee] h-10 w-10 flex items-center justify-center rounded-full">
-              <i className="ri-map-pin-fill"></i>
-            </h2>
-            <h4 className="font-medium">{elem} </h4>
-          </div>
-        );
-      })}
+      {suggestions.map((elem, idx) => (
+        <div
+          key={idx}
+          onClick={() => handleSuggestionClick(elem)}
+          className="flex items-center border-2 rounded-xl border-gray-150 active:border-black p-3 justify-start gap-4 my-2 "
+        >
+          <h2 className="bg-[#eee] h-10 w-10 flex items-center justify-center rounded-full">
+            <i className="ri-map-pin-fill"></i>
+          </h2>
+          {/* Extract a string property like description or format the object */}
+          <h4 className="font-medium">
+            {typeof elem === "object" ? elem.description : elem}
+          </h4>
+        </div>
+      ))}
     </div>
   );
 };
