@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 const ConfirmRidePopUp = (props) => {
   const [otp, setOtp] = useState("");
@@ -27,7 +27,11 @@ const ConfirmRidePopUp = (props) => {
             src="https://i.pinimg.com/736x/e3/ac/ee/e3acee0ffab4d039de2b424d7bf60665.jpg"
             alt=""
           />
-          <h2 className="text-lg font-medium">delulu Debs</h2>
+          <h2 className="text-lg font-medium">
+            {props.ride?.user.fullname.firstname +
+              " " +
+              props.ride?.user.fullname.lastname}
+          </h2>
         </div>
         <h5 className="text-lg font-semibold">6.9 KM</h5>
       </div>
@@ -38,20 +42,24 @@ const ConfirmRidePopUp = (props) => {
             <i className="text-lg ri-map-pin-2-line"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm text-gray-600 -mt-1">Marine Drive, MFP</p>
+              <p className="text-sm text-gray-600 -mt-1">
+                {props.ride?.pickup}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 border-b-2 border-gray-300  ">
             <i className="ri-map-pin-user-fill"></i>
             <div>
               <h3 className="text-lg font-medium">562/11-A</h3>
-              <p className="text-sm text-gray-600 -mt-1">Marine Drive, MFP</p>
+              <p className="text-sm text-gray-600 -mt-1">
+                {props.ride?.destination}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-5 p-3 ">
             <i className="ri-money-rupee-circle-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">₹ 193.20</h3>
+              <h3 className="text-lg font-medium">₹ {props.ride?.fair}</h3>
               <p className="text-sm text-gray-600 -mt-1">Cash</p>
             </div>
           </div>
@@ -73,13 +81,16 @@ const ConfirmRidePopUp = (props) => {
               type="text"
               placeholder="Enter OTP"
             />
-            <Link
-              to="/captain-riding"
-              onClick={() => {}}
+            <button
+              // to="/captain-riding"
+              onClick={() => {
+                props.setRidePopUpPanel(false);
+                props.setConfirmRidePopUpPanel(true);
+              }}
               className="w-full mt-5 text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg "
             >
               Confirm
-            </Link>
+            </button>
             <button
               onClick={() => {
                 props.setConfirmRidePopUpPanel(false);

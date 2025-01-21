@@ -17,10 +17,26 @@ function initializeSocket(server) {
     socket.on("join", async (data) => {
       const { userId, userType } = data;
 
-      if (userType === "user") {
-        await userModel.findByIdAndUpdate(userId, { socketId: socket.id });
-      } else if (userType === "captain") {
-        await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
+      console.log("Join event triggered with data:", data); // Log incoming data
+
+      if (!userId || !userType) {
+        console.log("Invalid join data. userId or userType missing.");
+        return;
+      }
+
+      try {
+        if (userType === "user") {
+          await userModel.findByIdAndUpdate(userId, { socketId: socket.id });
+          console.log(`User socketId updated: ${socket.id}`);
+        } else if (userType === "captain") {
+          await captainModel.findByIdAndUpdate(userId, { socketId: socket.id });
+          console.log(`Captain socketId updated: ${socket.id}`);
+        }
+      } catch (error) {
+        console.error(
+          "Error updating socketId in the database:",
+          error.message
+        );
       }
     });
 
@@ -46,7 +62,7 @@ function initializeSocket(server) {
 }
 
 const sendMessageToSocketId = (socketId, messageObject) => {
-  console.log(messageObject);
+  console.log("i am from socket", messageObject);
 
   if (io) {
     io.to(socketId).emit(messageObject.event, messageObject.data);
@@ -56,3 +72,6 @@ const sendMessageToSocketId = (socketId, messageObject) => {
 };
 
 module.exports = { initializeSocket, sendMessageToSocketId };
+
+// type: "Point",
+// coordinates: [location.ltd, location.lng],

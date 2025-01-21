@@ -8,7 +8,7 @@ module.exports.getCoordinates = async (req, res, next) => {
   }
 
   const { address } = req.query;
-  console.log("address", address);
+  // console.log("address", address);
 
   try {
     const coordinates = await mapService.getAddressCoordinate(address);

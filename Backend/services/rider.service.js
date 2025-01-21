@@ -26,7 +26,7 @@ async function getFare(pickup, destination) {
     car: 3,
     moto: 1.5,
   };
-  console.log("distanceTime is", distanceTime);
+  //console.log("distanceTime is", distanceTime);
   const fare = {
     auto: Math.round(
       baseFare.auto +
@@ -57,19 +57,19 @@ function getOtp(num) {
 }
 
 module.exports.createRide = async ({
-  userId,
+  user,
   pickup,
   destination,
   vehicleType,
 }) => {
-  if (!userId || !pickup || !destination || !vehicleType) {
+  if (!user || !pickup || !destination || !vehicleType) {
     throw new Error("All fields are required");
   }
-  console.log("all fields are", userId, pickup, destination, vehicleType);
+  //console.log("all fields are", userId, pickup, destination, vehicleType);
   const fair = await getFare(pickup, destination);
-  console.log("all fair is", fair);
+  //console.log("all fair is", fair);
   const rider = riderModel.create({
-    userId,
+    user,
     pickup,
     destination,
     otp: getOtp(6),

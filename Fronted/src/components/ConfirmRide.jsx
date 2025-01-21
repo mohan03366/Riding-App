@@ -38,12 +38,14 @@ const ConfirmRide = (props) => {
           <div className="flex items-center gap-5 p-3 ">
             <i className="ri-money-rupee-circle-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">₹ {props.fare}</h3>
+              <h3 className="text-lg font-medium">
+                ₹ {props.fare[props.vehicleType]}
+              </h3>
               <p className="text-sm text-gray-600 -mt-1">Cash</p>
             </div>
           </div>
         </div>
-        <Link
+        <button
           onClick={() => {
             props.setVehicleFound(true);
             props.setConfirmRidePanel(false);
@@ -52,7 +54,7 @@ const ConfirmRide = (props) => {
           className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg  text-center "
         >
           Confirm
-        </Link>
+        </button>
       </div>
     </div>
   );

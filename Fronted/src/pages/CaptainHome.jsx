@@ -41,14 +41,29 @@ const CaptainHome = () => {
     //return () => clearInterval(locationInterval);
   }, []);
 
-  socket.on("new-ride", (data) => {
-    setRide(data);
-    setRidePopUpPanel(true);
-  });
+  useEffect(() => {
+    if (socket) {
+      // Ensure listener is set up first
+      socket.on("new-ride", (rideWithUser) => {
+        console.log("Received ride data:", rideWithUser);
+        setRide(rideWithUser);
+        setRidePopUpPanel(true);
+      });
+    } else {
+      console.log("Socket is not connected yet.");
+    }
+
+    // Clean up the listener on unmount
+    return () => {
+      if (socket) {
+        socket.off("new-ride");
+      }
+    };
+  }, [socket]); // Listen for socket connection change
 
   async function confirmRide() {
     const response = await axios.post(
-      `&{import.meta.env.VITE_BASE_URL}/ride/confirm`,
+      `${import.meta.env.VITE_BASE_URL}/ride/confirm`,
       {
         rideId: ride._id,
         captainId: captain._id,
@@ -60,10 +75,8 @@ const CaptainHome = () => {
       }
     );
 
-    if (response.status === 200) {
-      setRidePopUpPanel(false);
-      setConfirmRidePopUpPanel(true);
-    }
+    setRidePopUpPanel(false);
+    setConfirmRidePopUpPanel(true);
   }
 
   useGSAP(
@@ -137,6 +150,7 @@ const CaptainHome = () => {
         className="z-10 w-full h-screen fixed bottom-0 px-3 translate-y-full  py-10 pt-12 bg-white"
       >
         <ConfirmRidePopUp
+          ride={ride}
           setConfirmRidePopUpPanel={setConfirmRidePopUpPanel}
           setRidePopUpPanel={setRidePopUpPanel}
         />
