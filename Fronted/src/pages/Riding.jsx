@@ -1,7 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { SocketContext } from "../context/SocketContext";
 
 const Riding = () => {
+  const location = useLocation();
+  const ride = location.state?.ride;
+  const navigate = useNavigate();
+  const { socket } = useContext(SocketContext);
+
+  socket.on("ride-ended", () => {
+    navigate("/home");
+  });
   return (
     <div className="h-screen">
       <Link
@@ -25,11 +34,13 @@ const Riding = () => {
             alt=""
           />
           <div className="text-right">
-            <h2 className="text-lg font-medium">Drake</h2>
+            <h2 className="text-lg font-medium">
+              {ride?.captain.fullname.firstname}
+            </h2>
             <h4 className="text-xl font-semibold  -mt-1 -mb-1">
               RJ69-PDF-0069
             </h4>
-            <p className="text-sm text-gray-600">Swift Dzire</p>
+            <p className="text-sm text-gray-600">{ride?.captain.vechileType}</p>
           </div>
         </div>
 
@@ -39,13 +50,15 @@ const Riding = () => {
               <i className="ri-map-pin-user-fill"></i>
               <div>
                 <h3 className="text-lg font-medium">562/11-A</h3>
-                <p className="text-sm text-gray-600 -mt-1">Marine Drive, MFP</p>
+                <p className="text-sm text-gray-600 -mt-1">
+                  {ride?.destination}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-5 p-3 ">
               <i className="ri-money-rupee-circle-fill"></i>
               <div>
-                <h3 className="text-lg font-medium">₹ 193.20</h3>
+                <h3 className="text-lg font-medium">₹ {ride?.fair}</h3>
                 <p className="text-sm text-gray-600 -mt-1">Cash</p>
               </div>
             </div>
