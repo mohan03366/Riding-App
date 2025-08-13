@@ -30,7 +30,7 @@ module.exports.createRide = async (req, res) => {
       pickupCoordinates.lng,
       5000
     );
-    console.log("hey", captainInRadius);
+    //console.log("hey", captainInRadius);
 
     // Step 4: Populate the ride with user details
     const rideWithUser = await rideModel
