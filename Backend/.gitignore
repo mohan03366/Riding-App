@@ -1,17 +1,1 @@
 
-node_module
-
-{
-      "fullname": {
-        "firstname": "Michael",
-        "lastname": "Johnson"
-      },
-      "email": "michael.johnson@example.com",
-      "password": "m1ke_J@hnson",
-      "vehicle":  {
-      "color": "Blue",
-      "plate": "ABC5678",
-      "capacity": 2,
-      "vehicleType": "motorcycle"
-    }
-    }
